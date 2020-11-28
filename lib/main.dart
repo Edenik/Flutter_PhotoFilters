@@ -1,11 +1,30 @@
+import 'dart:async';
+
+import 'package:PhotoFilters/screens/screens.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool _isTimerDone = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Timer(Duration(seconds: 3), () => setState(() => _isTimerDone = true));
+  }
+
+  Widget _getScreenId() {
+    return _isTimerDone ? CameraScreen() : SplashScreen();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,29 +33,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Flutter PhotoFilters'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Camera',
-        child: Icon(Icons.camera_alt),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      home: _getScreenId(),
     );
   }
 }
