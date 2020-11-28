@@ -1,5 +1,4 @@
 import 'package:PhotoFilters/utilities/constants.dart';
-import 'package:PhotoFilters/widgets/circular_icon_button.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -7,6 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:async';
 import 'dart:io';
+
+import 'edit_photo_screen.dart';
 
 class CameraScreen extends StatefulWidget {
   final List<CameraDescription> cameras;
@@ -26,7 +27,7 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   void initState() {
     try {
-      onCameraSelected(widget.cameras[0]);
+      _onCameraSelected(widget.cameras[0]);
     } catch (e) {
       print(e.toString());
     }
@@ -103,7 +104,7 @@ class _CameraScreenState extends State<CameraScreen> {
                               bottomLeft: Radius.circular(15),
                               topLeft: Radius.circular(15))),
                       onPressed: () =>
-                          changeConsumer(CameraConsumer.originalSize),
+                          _changeConsumer(CameraConsumer.originalSize),
                       color: _cameraConsumer == CameraConsumer.originalSize
                           ? Colors.white.withOpacity(0.85)
                           : Colors.black38,
@@ -126,7 +127,7 @@ class _CameraScreenState extends State<CameraScreen> {
                           borderRadius: BorderRadius.only(
                               bottomRight: Radius.circular(15),
                               topRight: Radius.circular(15))),
-                      onPressed: () => changeConsumer(CameraConsumer.crop),
+                      onPressed: () => _changeConsumer(CameraConsumer.crop),
                       color: _cameraConsumer == CameraConsumer.crop
                           ? Colors.white.withOpacity(0.85)
                           : Colors.black38,
@@ -185,12 +186,12 @@ class _CameraScreenState extends State<CameraScreen> {
                                 BorderRadius.all(Radius.circular(50.0)),
                             onTap: () {
                               if (!_toggleCamera) {
-                                onCameraSelected(widget.cameras[1]);
+                                _onCameraSelected(widget.cameras[1]);
                                 setState(() {
                                   _toggleCamera = true;
                                 });
                               } else {
-                                onCameraSelected(widget.cameras[0]);
+                                _onCameraSelected(widget.cameras[0]);
                                 setState(() {
                                   _toggleCamera = false;
                                 });
@@ -215,7 +216,7 @@ class _CameraScreenState extends State<CameraScreen> {
                           child: InkWell(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50.0)),
-                            onTap: getGalleryImage,
+                            onTap: _getGalleryImage,
                             child: Container(
                               padding: EdgeInsets.all(4.0),
                               child: Image.asset(
@@ -239,13 +240,13 @@ class _CameraScreenState extends State<CameraScreen> {
     );
   }
 
-  void changeConsumer(CameraConsumer cameraConsumer) {
+  void _changeConsumer(CameraConsumer cameraConsumer) {
     if (_cameraConsumer != cameraConsumer) {
       setState(() => _cameraConsumer = cameraConsumer);
     }
   }
 
-  void onCameraSelected(CameraDescription cameraDescription) async {
+  void _onCameraSelected(CameraDescription cameraDescription) async {
     if (controller != null) await controller.dispose();
     controller =
         CameraController(cameraDescription, ResolutionPreset.ultraHigh);
@@ -276,41 +277,39 @@ class _CameraScreenState extends State<CameraScreen> {
         });
         if (filePath != null) {
           showMessage('Picture saved to $filePath');
-          setCameraResult();
+          _setCameraResult();
         }
       }
     });
   }
 
-  void getGalleryImage() async {
+  void _getGalleryImage() async {
     PickedFile pickedFile = await _picker.getImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
         imagePath = pickedFile.path;
       });
-      setCameraResult();
+      print('arrived before setcameraresult');
+      _setCameraResult();
     } else {
       print('No image selected.');
     }
   }
 
-  void setCameraResult() async {
-    if (_cameraConsumer == CameraConsumer.originalSize) {
+  void _setCameraResult() async {
+    print(_cameraConsumer);
+    if (_cameraConsumer == CameraConsumer.crop) {
       File croppedImage = await _cropImage(File(imagePath));
       if (croppedImage == null) {
         return;
       }
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //       builder: (_) => EditPhotoScreen(
-      //             imageFile: croppedImage,
-      //           )
-      //       //  CreatePostScreen(
-      //       //   imageFile: croppedImage,
-      //       // ),
-      //       ),
-      // );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (_) => EditPhotoScreen(
+                  imageFile: croppedImage,
+                )),
+      );
     } else {
       // Navigator.push(
       //   context,
