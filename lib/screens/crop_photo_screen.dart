@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:PhotoFilters/screens/result_screen.dart';
 import 'package:PhotoFilters/services/filtered_image_converter.dart';
 import 'package:PhotoFilters/services/liquid_swipe_pages.dart';
 import 'package:PhotoFilters/utilities/filters.dart';
@@ -8,14 +9,14 @@ import 'package:flutter/rendering.dart';
 
 import 'package:liquid_swipe/liquid_swipe.dart';
 
-class EditPhotoScreen extends StatefulWidget {
+class CropPhotoScreen extends StatefulWidget {
   final File imageFile;
-  EditPhotoScreen({@required this.imageFile});
+  CropPhotoScreen({@required this.imageFile});
   @override
-  _EditPhotoScreenState createState() => _EditPhotoScreenState();
+  _CropPhotoScreenState createState() => _CropPhotoScreenState();
 }
 
-class _EditPhotoScreenState extends State<EditPhotoScreen>
+class _CropPhotoScreenState extends State<CropPhotoScreen>
     with TickerProviderStateMixin {
   final GlobalKey _globalKey = GlobalKey();
   TabController _tabController;
@@ -154,13 +155,14 @@ class _EditPhotoScreenState extends State<EditPhotoScreen>
 
   void convertFilteredImageToImageFile() async {
     File file = await FilteredImageConverter.convert(globalKey: _globalKey);
-    // Navigator.of(_globalKey.currentContext).push(
-    //   MaterialPageRoute(
-    //     builder: (context) => CreatePostScreen(
-    //       imageFile: file,
-    //     ),
-    //   ),
-    // );
+    Navigator.of(_globalKey.currentContext).push(
+      MaterialPageRoute(
+        builder: (context) => ResultPhotoScreen(
+          filterTitle: filters[_selectedIndex].name,
+          imageFile: file,
+        ),
+      ),
+    );
   }
 
   Container _buildFilterThumbnail(int index, Size size) {

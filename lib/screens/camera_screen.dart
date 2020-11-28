@@ -1,3 +1,4 @@
+import 'package:PhotoFilters/screens/original_size_photo_screen.dart';
 import 'package:PhotoFilters/utilities/constants.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:async';
 import 'dart:io';
 
-import 'edit_photo_screen.dart';
+import 'crop_photo_screen.dart';
 
 class CameraScreen extends StatefulWidget {
   final List<CameraDescription> cameras;
@@ -29,6 +30,7 @@ class _CameraScreenState extends State<CameraScreen> {
     try {
       _onCameraSelected(widget.cameras[0]);
     } catch (e) {
+      print('error');
       print(e.toString());
     }
 
@@ -75,21 +77,6 @@ class _CameraScreenState extends State<CameraScreen> {
               ),
             ),
           ),
-          // Align(
-          //   alignment: Alignment.topRight,
-          //   child: Padding(
-          //     padding: const EdgeInsets.all(30.0),
-          //     child: CircularIconButton(
-          //       splashColor: Colors.blue,
-          //       icon: Icon(
-          //         Icons.close_sharp,
-          //         color: Colors.white,
-          //         size: 22,
-          //       ),
-          //       onTap: () {},
-          //     ),
-          //   ),
-          // ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Column(
@@ -306,17 +293,17 @@ class _CameraScreenState extends State<CameraScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (_) => EditPhotoScreen(
+            builder: (_) => CropPhotoScreen(
                   imageFile: croppedImage,
                 )),
       );
     } else {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (_) => CreateStoryScreen(File(imagePath)),
-      //   ),
-      // );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => OriginalSizePhotoScreen(File(imagePath)),
+        ),
+      );
     }
   }
 
