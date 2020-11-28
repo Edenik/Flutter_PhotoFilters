@@ -132,8 +132,8 @@ class _CropPhotoScreenState extends State<CropPhotoScreen>
                 TabBar(
                   controller: _tabController,
                   indicatorWeight: 3.0,
-                  indicatorColor: Colors.blue,
-                  labelColor: Colors.blue,
+                  indicatorColor: Theme.of(context).primaryColor,
+                  labelColor: Theme.of(context).primaryColor,
                   labelStyle: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.w600,
@@ -176,7 +176,9 @@ class _CropPhotoScreenState extends State<CropPhotoScreen>
       padding: const EdgeInsets.all(4.0),
       decoration: BoxDecoration(
         border: Border.all(
-            color: _selectedIndex == index ? Colors.blue : Colors.white,
+            color: _selectedIndex == index
+                ? Theme.of(context).primaryColor
+                : Colors.white,
             width: 4.0),
       ),
       child: ColorFiltered(

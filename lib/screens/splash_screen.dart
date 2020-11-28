@@ -21,7 +21,7 @@ class SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     _getCameras();
-    Timer(Duration(seconds: 3), () => setState(() => _isTimerDone = true));
+    Timer(Duration(seconds: 2), () => setState(() => _isTimerDone = true));
   }
 
   void _getCameras() async {
@@ -38,7 +38,6 @@ class SplashScreenState extends State<SplashScreen> {
     return _isTimerDone && _cameras != null
         ? CameraScreen(_cameras)
         : Scaffold(
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             body: Stack(
               fit: StackFit.expand,
               children: <Widget>[
@@ -84,7 +83,10 @@ class SplashScreenState extends State<SplashScreen> {
                       style: TextStyle(fontSize: 70, fontFamily: 'Billabong'),
                     ),
                     SizedBox(
-                      height: 50,
+                      height: 80,
+                    ),
+                    Center(
+                      child: CircularProgressIndicator(),
                     ),
                   ],
                 ),

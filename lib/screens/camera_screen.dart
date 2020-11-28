@@ -337,7 +337,7 @@ class _CameraScreenState extends State<CameraScreen> {
         toolbarColor: Theme.of(context).appBarTheme.color,
         toolbarWidgetColor: Theme.of(context).accentColor,
         toolbarTitle: 'Crop Photo',
-        activeControlsWidgetColor: Colors.blue,
+        activeControlsWidgetColor: Theme.of(context).primaryColor,
       ),
       sourcePath: imageFile.path,
       aspectRatio: CropAspectRatio(ratioX: 1.0, ratioY: 1.0),

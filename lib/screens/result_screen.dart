@@ -28,7 +28,7 @@ class ResultPhotoScreen extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             onPressed: () => _reset(context),
-            color: Colors.black26,
+            color: Theme.of(context).primaryColor,
             child: Text(
               'Reset',
               style: TextStyle(fontSize: 18, color: Colors.white),

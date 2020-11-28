@@ -25,7 +25,7 @@ class CircularIconButton extends StatelessWidget {
           child: Material(
             color: backColor, // button color
             child: InkWell(
-              splashColor: backColor == Colors.blue
+              splashColor: backColor == Theme.of(context).primaryColor
                   ? backColor
                   : splashColor, // inkwell color
               child: SizedBox(

@@ -12,8 +12,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter PhotoFilters',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          backgroundColor: Colors.white, primaryColor: Colors.blueGrey),
       home: SplashScreen(),
     );
   }

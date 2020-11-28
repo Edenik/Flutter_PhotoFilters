@@ -97,7 +97,7 @@ class _OriginalSizePhotoScreenState extends State<OriginalSizePhotoScreen> {
           children: [
             CircularIconButton(
               backColor: Colors.black26,
-              splashColor: Colors.blue.withOpacity(0.5),
+              splashColor: Theme.of(context).primaryColor.withOpacity(0.5),
               icon: Icon(
                 Icons.close_sharp,
                 color: Colors.white,
@@ -115,11 +115,11 @@ class _OriginalSizePhotoScreenState extends State<OriginalSizePhotoScreen> {
                       ? CircularIconButton(
                           padding: const EdgeInsets.only(right: 8),
                           backColor: _selectedFilterIndex != 0
-                              ? Colors.blue.withOpacity(0.5)
+                              ? Theme.of(context).primaryColor.withOpacity(0.5)
                               : Colors.black26,
                           splashColor: _selectedFilterIndex != 0
                               ? Colors.black26
-                              : Colors.blue.withOpacity(0.5),
+                              : Theme.of(context).primaryColor.withOpacity(0.5),
                           icon: Icon(
                             Icons.refresh,
                             color: Colors.white,
