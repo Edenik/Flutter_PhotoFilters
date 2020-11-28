@@ -1,0 +1,4 @@
+enum CameraConsumer {
+  originalSize,
+  crop,
+}
