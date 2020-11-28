@@ -7,6 +7,12 @@ PhotoFilters + Custom Camera Screen inspired by my
 </a> </p>
 
  <p align="center">
+<a href="https://github.com/Edenik/Flutter_PhotoFilters/raw/main/media/app-release.apk">
+<img src="https://level01.io/wp-content/uploads/2020/10/direct-download-apk.png" 
+width="250">
+</a>
+</p>
+ <p align="center">
 Latest Update : 28/11/20
 </p>
 
@@ -31,7 +37,7 @@ Latest Update : 28/11/20
 * [Url Launcer](https://github.com/flutter/plugins/tree/master/packages/url_launcher)
 * [Image Cropper](https://github.com/hnvn/flutter_image_cropper)
 * [Image Picker](https://github.com/flutter/plugins/tree/master/packages/image_picker)
-* [Image Picker](https://github.com/iamSahdeep/liquid_swipe_flutter)
+* [Liquid Swipe](https://github.com/iamSahdeep/liquid_swipe_flutter)
 
 
 <p align="center">
